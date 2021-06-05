@@ -1,7 +1,7 @@
 {
   "name": "project-module-2",
   "version": "1.0.0",
-  "description": "Favorite book storage app",
+  "description": "Favourite book storage app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -36,6 +36,9 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.13"
+    "hbs": "^4.1.2",
+    "mongoose": "^5.12.13",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
   }
 }
