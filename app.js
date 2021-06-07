@@ -5,34 +5,28 @@ const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 
-//setup database
-require("./config/db.config");
-
 const app = express();
 
-app.use(logger("dev"));
+//Setup db and session
+require("./config/db.config");
+require("./config/session.config")(app);
 
-//express view engine setup
-// eslint-disable-next-line no-undef
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
-// eslint-disable-next-line no-undef
-app.use(express.static(path.join(__dirname, "public")));
-
-// eslint-disable-next-line no-undef
-app.use(express.static(path.join(__dirname, "public")));
+//Middleware Setup
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//Routes
-const indexRouter = require("./routes/index.routes");
-const authRouter = require("./routes/auth.routes");
+//express view engine setup
+/* eslint-disable no-undef */
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "hbs");
+app.use(express.static(path.join(__dirname, "public")));
+/* eslint-enable no-undef */
 
-//Routes middleware
-app.use("/", indexRouter);
-app.use("/", authRouter);
+//Routes
+app.use("/", require("./routes/index.routes"));
+app.use("/", require("./routes/auth.routes"));
 
 /* eslint-disable no-undef */
 app.listen(
