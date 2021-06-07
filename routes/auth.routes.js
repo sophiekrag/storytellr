@@ -94,4 +94,10 @@ router.get("/userProfile", (req, res) => {
   res.render("users/user-profile", { userInSession: req.session.currentUser });
 });
 
+//------LOGOUT------
+router.post("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 module.exports = router;
