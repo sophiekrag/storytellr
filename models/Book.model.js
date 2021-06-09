@@ -5,7 +5,6 @@ const bookSchema = new Schema(
     title: {
       type: String,
       required: [true, "Title is required."],
-      unique: true,
     },
     author: {
       type: String,
@@ -19,4 +18,4 @@ const bookSchema = new Schema(
   }
 );
 
-module.exports = model("Books", bookSchema);
+module.exports = model("Book", bookSchema);
