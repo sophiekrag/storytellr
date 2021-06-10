@@ -3,13 +3,14 @@ const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 
 const router = new Router();
+const isAuth = require("../middleware/auth");
 
 const saltRounds = 10;
 
 const User = require("../models/User.model");
 
 //------SIGNUP------
-router.get("/signup", (req, res) => res.render("auth/signup"));
+router.get("/signup", isAuth, (req, res) => res.render("auth/signup"));
 
 router.post("/signup", (req, res, next) => {
   const { username, email, password } = req.body;
@@ -89,9 +90,9 @@ router.post("/login", (req, res, next) => {
     .catch((error) => next(error));
 });
 
-router.get("/userProfile", (req, res) => {
-  res.render("user/dashboard", { userInSession: req.session.currentUser });
-});
+// router.get("/userProfile", (req, res) => {
+//   res.render("user/dashboard", { userInSession: req.session.currentUser });
+// });
 
 //------LOGOUT------
 router.post("/logout", (req, res) => {

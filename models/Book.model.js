@@ -12,6 +12,7 @@ const bookSchema = new Schema(
     },
     description: String,
     rating: Number,
+    user: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

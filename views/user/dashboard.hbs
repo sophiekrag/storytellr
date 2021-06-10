@@ -4,6 +4,10 @@
     <p>This is your profile page!</p>
 </header>
 
+{{#each books.books}}
+<p>{{this.title}}</p>
+{{/each}}
+
 <div class="d-grid gap-2 col-6 mx-auto">
     <form id="create-book" action="books/create" method="GET">
         <button class="btn btn-primary">Create book</button>
