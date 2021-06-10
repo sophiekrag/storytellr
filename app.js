@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //Routes
 app.use("/", require("./routes/index.routes"));
 app.use("/", require("./routes/auth.routes"));
-app.use("/", require("./routes/books.routes"));
+app.use("/", require("./routes/user.routes"));
 
 /* eslint-disable no-undef */
 app.listen(

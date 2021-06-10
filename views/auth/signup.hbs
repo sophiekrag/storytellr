@@ -1,22 +1,30 @@
-<div id="form">
-  <h2>Signup</h2>
-  <form action="/signup" method="POST">
-    <label>Username
-      <input type="text" name="username" />
-    </label>
-    
-    <label>Email
-      <input type="email" name="email" placeholder="booklover@email.com" />
-    </label>
-    
-    <label>Password
-      <input type="password" name="password" placeholder="********" />
-    </label>
+<div class="form">
+  <h2 class="titleH2">Signup</h2>
 
-    <button type="submit">Create account</button>
+  <form action="/signup" method="POST">
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
+      <label for="floatingInput">Username</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+      <label for="floatingInput">Email</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary" type="submit">Create account</button>
+    </div>
+
 
     {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+    <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
 </div>

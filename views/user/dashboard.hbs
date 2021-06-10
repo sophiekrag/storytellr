@@ -1,0 +1,21 @@
+{{#if userInSession}}
+<header class="welkom">
+    <h2>Welcome {{ userInSession.username }}</h2>
+    <p>This is your profile page!</p>
+</header>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <form id="create-book" action="books/create" method="GET">
+        <button class="btn btn-primary">Create book</button>
+    </form>
+</div>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <form id="logout-form" action="/logout" method="POST">
+        <button class="btn btn-primary">Logout</button>
+    </form>
+</div>
+
+{{else}}
+<p>You are not logged in</p>
+{{/if}}

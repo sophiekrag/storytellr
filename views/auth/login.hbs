@@ -1,20 +1,24 @@
-<div id="form">
-  <h2>Login</h2>
+<div class="form">
+  <h2 class="titleH2">Login</h2>
+
   <form action="/login" method="POST">
-    {{!-- <label for="input-username"> Username </label>
-    <input type="text" name="username" placeholder="Your username" /> --}}
 
-    <label for="input-email">Email</label>
-    <input type="email" name="email" placeholder="booklover@email.com" />
-    
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+      <label for="floatingInput">Email</label>
+    </div>
 
-    <label for="input-password"> Password </label>
-    <input type="password" name="password" id="input-password" placeholder="********" />
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
 
-    <button type="submit">Login</button>
- 
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+
     {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+    <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
 </div>
