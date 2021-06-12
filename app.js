@@ -5,7 +5,7 @@ const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 
-const isAuth = require("./middleware/auth");
+// const isAuth = require("./middleware/auth");
 const app = express();
 
 //Setup db and session
@@ -27,8 +27,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //Routes
 app.use("/", require("./routes/index.routes"));
+app.use("/", require("./routes/stories.routes"));
 app.use("/", require("./routes/auth.routes"));
-app.use("/", isAuth, require("./routes/user.routes"));
+app.use("/", require("./routes/user.routes"));
 
 /* eslint-disable no-undef */
 app.listen(

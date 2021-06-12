@@ -1,35 +1,43 @@
 {{#if userInSession}}
 <header class="welkom">
-    <h2>Welcome {{ userInSession.username }}</h2>
-    <p>This is your profile page!</p>
+  <h2>Welcome {{ userInSession.username }}</h2>
 </header>
 
-<h3>Stories</h3>
-<hr>
- 
-{{#each stories.stories}}
-  <div>
-    <h4>{{this.title}}</h4>
-    <a href="/stories/{{id}}">See details</a>
-    <a href="/stories/{{id}}/edit">Edit</a> 
-     <form action="/stories/{{id}}/delete" method="POST"> 
-      <button>Delete</button>
+<main class="stories">
+  <h3>Stories</h3>
+  <hr>
+
+<div class="story-cards">
+  {{#each stories.stories}}
+  <div class="card" style="width: 18rem;">
+    <img src="images/story-book.jpeg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{this.title}}</h5>
+      <p class="card-text story-sum">{{this.description}}</p>
+      <a href="/stories/{{id}}" class="card-link">See details</a>
+      <a href="/stories/{{id}}/edit" class="card-link">Edit</a>
+      <form action="/stories/{{id}}/delete" method="POST">
+        <button type="submit" class="btn btn-light">Delete</button>
+      </form>
+    </div>
+  </div>
+  {{/each}}
+  </div>
+
+  <div class="d-grid gap-2  mx-auto">
+    <form id="create-book" action="stories/create" method="GET">
+      <button class="btn btn-primary">Create story</button>
     </form>
   </div>
-  <hr>
-{{/each}}
+</main>
 
-<div class="d-grid gap-2 col-6 mx-auto">
-    <form id="create-book" action="stories/create" method="GET">
-        <button class="btn btn-primary">Create story</button>
-    </form>
-</div>
-
-<div class="d-grid gap-2 col-6 mx-auto">
+<footer class="logout">
+  <div class="d-grid gap-2  mx-auto">
     <form id="logout-form" action="/logout" method="POST">
-        <button class="btn btn-primary">Logout</button>
+      <button class="btn btn-primary">Logout</button>
     </form>
-</div>
+  </div>
+</footer>
 
 {{else}}
 <p>You are not logged in</p>

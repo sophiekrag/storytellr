@@ -2,9 +2,10 @@ const router = require("express").Router();
 
 const User = require("../models/User.model");
 const Story = require("../models/Story.model");
+const isAuth = require("../middleware/auth");
 
 //Direction to the userProfile
-router.get("/userProfile", async (req, res) => {
+router.get("/userProfile", isAuth, async (req, res) => {
   try {
     const result = await User.findById(req.session.currentUser._id).populate(
       "stories"
@@ -19,12 +20,12 @@ router.get("/userProfile", async (req, res) => {
 });
 
 //Get the books/create route on the site
-router.get("/stories/create", (req, res) => {
+router.get("/stories/create", isAuth, (req, res) => {
   res.render("user/story-create");
 });
 
 //Post the newly created book into the db
-router.post("/create", async (req, res) => {
+router.post("/create", isAuth, async (req, res) => {
   const { title, description } = req.body;
   try {
     const newStory = await Story.create({
@@ -46,14 +47,14 @@ router.get("/stories/:storyId", async (req, res, next) => {
   const { storyId } = req.params;
   try {
     const storyDetails = await Story.findById(storyId).populate("author");
-    res.render("user/story-detail", { story: storyDetails });
+    res.render("story-detail", { story: storyDetails });
   } catch (err) {
     console.log("Error while retrieving story details: ", err), next(err);
   }
 });
 
 //Edit book
-router.get("/stories/:id/edit", async (req, res, next) => {
+router.get("/stories/:id/edit", isAuth, async (req, res, next) => {
   const { id } = req.params;
   try {
     const storyToEdit = await Story.findById(id);
@@ -63,7 +64,7 @@ router.get("/stories/:id/edit", async (req, res, next) => {
   }
 });
 
-router.post("/stories/:id/edit", async (req, res, next) => {
+router.post("/stories/:id/edit", isAuth, async (req, res, next) => {
   const { id } = req.params;
   const { title, description } = req.body;
   try {
@@ -79,7 +80,7 @@ router.post("/stories/:id/edit", async (req, res, next) => {
 });
 
 //Delete book
-router.post("/stories/:id/delete", async (req, res, next) => {
+router.post("/stories/:id/delete", isAuth, async (req, res, next) => {
   const { id } = req.params;
   try {
     await Story.findByIdAndDelete(id);
