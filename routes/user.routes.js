@@ -1,17 +1,17 @@
 const router = require("express").Router();
 
 const User = require("../models/User.model");
-const Book = require("../models/Book.model");
+const Story = require("../models/Story.model");
 
 //Direction to the userProfile
 router.get("/userProfile", async (req, res) => {
   try {
     const result = await User.findById(req.session.currentUser._id).populate(
-      "books"
+      "stories"
     );
     res.render("user/dashboard", {
       userInSession: req.session.currentUser,
-      books: result,
+      stories: result,
     });
   } catch (err) {
     console.log(`Err while getting the posts from the DB: ${err}`);
@@ -19,23 +19,21 @@ router.get("/userProfile", async (req, res) => {
 });
 
 //Get the books/create route on the site
-router.get("/books/create", (req, res) => {
-  res.render("user/book-create");
+router.get("/stories/create", (req, res) => {
+  res.render("user/story-create");
 });
 
 //Post the newly created book into the db
 router.post("/create", async (req, res) => {
-  const { title, author, description, rating } = req.body;
+  const { title, description } = req.body;
   try {
-    const newBook = await Book.create({
+    const newStory = await Story.create({
       title,
-      author,
+      author: req.session.currentUser._id,
       description,
-      rating,
-      user: req.session.currentUser._id,
     });
     await User.findByIdAndUpdate(req.session.currentUser._id, {
-      $push: { books: newBook._id },
+      $push: { stories: newStory._id },
     });
     res.redirect("/userProfile");
   } catch (err) {
@@ -44,47 +42,47 @@ router.post("/create", async (req, res) => {
 });
 
 //Get details
-router.get("/books/:bookId", async (req, res, next) => {
-  const { bookId } = req.params;
+router.get("/stories/:storyId", async (req, res, next) => {
+  const { storyId } = req.params;
   try {
-    const bookDetails = await Book.findById(bookId);
-    res.render("user/book-detail", { book: bookDetails });
+    const storyDetails = await Story.findById(storyId);
+    res.render("user/story-detail", { story: storyDetails });
   } catch (err) {
-    console.log("Error while retrieving book details: ", err), next(err);
+    console.log("Error while retrieving story details: ", err), next(err);
   }
 });
 
 //Edit book
-router.get("/books/:id/edit", async (req, res, next) => {
+router.get("/stories/:id/edit", async (req, res, next) => {
   const { id } = req.params;
   try {
-    const bookToEdit = await Book.findById(id);
-    res.render("user/book-edit", { book: bookToEdit });
+    const storyToEdit = await Story.findById(id);
+    res.render("user/story-edit", { story: storyToEdit });
   } catch (err) {
     next(err);
   }
 });
 
-router.post("/books/:id/edit", async (req, res, next) => {
+router.post("/stories/:id/edit", async (req, res, next) => {
   const { id } = req.params;
-  const { title, description, author, rating } = req.body;
+  const { title, description } = req.body;
   try {
-    const bookToUpdate = await Book.findByIdAndUpdate(
+    const storyToUpdate = await Story.findByIdAndUpdate(
       id,
-      { title, description, author, rating },
+      { title, description },
       { new: true }
     );
-    res.redirect(`/books/${bookToUpdate.id}`);
+    res.redirect(`/stories/${storyToUpdate.id}`);
   } catch (err) {
     next(err);
   }
 });
 
 //Delete book
-router.post("/books/:id/delete", async (req, res, next) => {
+router.post("/stories/:id/delete", async (req, res, next) => {
   const { id } = req.params;
   try {
-    await Book.findByIdAndDelete(id);
+    await Story.findByIdAndDelete(id);
     res.redirect("/userProfile");
   } catch (err) {
     next(err);

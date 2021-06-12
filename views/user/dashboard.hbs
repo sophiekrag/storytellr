@@ -4,15 +4,15 @@
     <p>This is your profile page!</p>
 </header>
 
-<h3>Books</h3>
+<h3>Stories</h3>
 <hr>
  
-{{#each books.books}}
+{{#each stories.stories}}
   <div>
     <h4>{{this.title}}</h4>
-    <a href="/books/{{id}}">See details</a>
-    <a href="/books/{{id}}/edit">Edit</a> 
-     <form action="/books/{{id}}/delete" method="POST"> 
+    <a href="/stories/{{id}}">See details</a>
+    <a href="/stories/{{id}}/edit">Edit</a> 
+     <form action="/stories/{{id}}/delete" method="POST"> 
       <button>Delete</button>
     </form>
   </div>
@@ -20,8 +20,8 @@
 {{/each}}
 
 <div class="d-grid gap-2 col-6 mx-auto">
-    <form id="create-book" action="books/create" method="GET">
-        <button class="btn btn-primary">Create book</button>
+    <form id="create-book" action="stories/create" method="GET">
+        <button class="btn btn-primary">Create story</button>
     </form>
 </div>
 

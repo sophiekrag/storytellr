@@ -20,7 +20,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
-    books: [{ type: Schema.Types.ObjectId, ref: "Book" }],
+    stories: [{ type: Schema.Types.ObjectId, ref: "Story" }],
   },
   {
     timestamps: true,
