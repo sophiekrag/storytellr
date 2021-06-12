@@ -44,39 +44,50 @@ router.get("/userProfile", isAuth, async (req, res) => {
 });
 
 //Get details
-router.get("/userProfile/:bookId", (req, res, next) => {
+router.get("/userProfile/:bookId", async (req, res, next) => {
   const { bookId } = req.params;
-
-  Book.findById(bookId)
-    .then((theBook) => res.render("user/book-detail", { book: theBook }))
-    .catch((error) => {
-      console.log("Error while retrieving book details: ", error);
-
-      next(error);
-    });
+  try {
+    const bookDetails = await Book.findById(bookId);
+    res.render("user/book-detail", { book: bookDetails });
+  } catch (err) {
+    console.log("Error while retrieving book details: ", err), next(err);
+  }
 });
 
-router.get("/userProfile/:id/edit", (req, res, next) => {
+//Edit book
+router.get("/userProfile/:id/edit", async (req, res, next) => {
   const { id } = req.params;
-
-  Book.findById(id)
-    .then((bookToEdit) => {
-      console.log(bookToEdit);
-      res.render("user/book-edit", { book: bookToEdit });
-    })
-    .catch((error) => next(error));
+  try {
+    const bookToEdit = await Book.findById(id);
+    res.render("user/book-edit", { book: bookToEdit });
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.post("/userProfile/:id/edit", (req, res, next) => {
+router.post("/userProfile/:id/edit", async (req, res, next) => {
   const { id } = req.params;
   const { title, description, author, rating } = req.body;
-
-  Book.findByIdAndUpdate(
-    id,
-    { title, description, author, rating },
-    { new: true }
-  )
-    .then((updatedBook) => res.redirect(`/userProfile/${updatedBook.id}`))
-    .catch((error) => next(error));
+  try {
+    const bookToUpdate = await Book.findByIdAndUpdate(
+      id,
+      { title, description, author, rating },
+      { new: true }
+    );
+    res.redirect(`/userProfile/${bookToUpdate.id}`);
+  } catch (err) {
+    next(err);
+  }
 });
+
+router.post("/userProfile/:id/delete", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await Book.findByIdAndDelete(id);
+    res.redirect("/userProfile");
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

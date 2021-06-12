@@ -4,18 +4,17 @@
     <p>This is your profile page!</p>
 </header>
 
-{{!-- {{#each books.books}}
-<p>{{this.title}}</p>
-{{/each}} --}}
-
-<h1>Books</h1>
+<h3>Books</h3>
 <hr>
  
 {{#each books.books}}
   <div>
-    <h3>{{this.title}}</h3>
+    <h4>{{this.title}}</h4>
     <a href="/userProfile/{{id}}">See details</a>
-    <a href="/userProfile/{{id}}/edit">Edit</a> {{!-- <-- add this line  --}}
+    <a href="/userProfile/{{id}}/edit">Edit</a> 
+     <form action="/userProfile/{{id}}/delete" method="POST"> 
+      <button>Delete</button>
+    </form>
   </div>
   <hr>
 {{/each}}
