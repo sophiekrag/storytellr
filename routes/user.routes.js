@@ -4,7 +4,7 @@ const User = require("../models/User.model");
 const Story = require("../models/Story.model");
 const isAuth = require("../middleware/auth");
 
-//Direction to the userProfile
+/* GET userProflie page*/
 router.get("/userProfile", isAuth, async (req, res) => {
   try {
     const result = await User.findById(req.session.currentUser._id).populate(
@@ -19,12 +19,12 @@ router.get("/userProfile", isAuth, async (req, res) => {
   }
 });
 
-//Get the books/create route on the site
+/* GET stories/create page*/
 router.get("/stories/create", isAuth, (req, res) => {
   res.render("user/story-create");
 });
 
-//Post the newly created book into the db
+/* Post new created story */
 router.post("/create", isAuth, async (req, res) => {
   const { title, description } = req.body;
   try {
@@ -42,7 +42,7 @@ router.post("/create", isAuth, async (req, res) => {
   }
 });
 
-//Get details
+/* GET story details page*/
 router.get("/stories/:storyId", async (req, res, next) => {
   const { storyId } = req.params;
   try {
@@ -53,7 +53,7 @@ router.get("/stories/:storyId", async (req, res, next) => {
   }
 });
 
-//Edit book
+/* GET story edit page*/
 router.get("/stories/:id/edit", isAuth, async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -64,6 +64,7 @@ router.get("/stories/:id/edit", isAuth, async (req, res, next) => {
   }
 });
 
+/* Post edited story */
 router.post("/stories/:id/edit", isAuth, async (req, res, next) => {
   const { id } = req.params;
   const { title, description } = req.body;

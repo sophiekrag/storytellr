@@ -2,7 +2,7 @@ const express = require("express");
 const Story = require("../models/Story.model");
 const router = express.Router();
 
-/* GET home page */
+/* GET story page*/
 router.get("/stories", async (req, res, next) => {
   const { story } = req.params;
   try {

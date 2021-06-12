@@ -1,6 +1,5 @@
 body {
-  width: 65%;
-  margin: 50px auto;
+  width: 100%;
 }
 
 body::after {
@@ -8,13 +7,36 @@ body::after {
   background: url(../images/story-book.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.2;
+  background-attachment: scroll;
+  opacity: 0.15;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
+  position: fixed;
   z-index: -1;
+}
+
+.navbar-story {
+  width: 100%;
+  top: 0;
+  position: sticky;
+  z-index: 1;
+}
+
+.index-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  color: grey;
+}
+.content {
+  width: 65%;
+  margin: 50px auto;
 }
 
 .titleH2,
@@ -34,4 +56,10 @@ body::after {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.welkom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
