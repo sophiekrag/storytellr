@@ -43,4 +43,40 @@ router.get("/userProfile", isAuth, async (req, res) => {
   }
 });
 
+//Get details
+router.get("/userProfile/:bookId", (req, res, next) => {
+  const { bookId } = req.params;
+
+  Book.findById(bookId)
+    .then((theBook) => res.render("user/book-detail", { book: theBook }))
+    .catch((error) => {
+      console.log("Error while retrieving book details: ", error);
+
+      next(error);
+    });
+});
+
+router.get("/userProfile/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+
+  Book.findById(id)
+    .then((bookToEdit) => {
+      console.log(bookToEdit);
+      res.render("user/book-edit", { book: bookToEdit });
+    })
+    .catch((error) => next(error));
+});
+
+router.post("/userProfile/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+  const { title, description, author, rating } = req.body;
+
+  Book.findByIdAndUpdate(
+    id,
+    { title, description, author, rating },
+    { new: true }
+  )
+    .then((updatedBook) => res.redirect(`/userProfile/${updatedBook.id}`))
+    .catch((error) => next(error));
+});
 module.exports = router;
