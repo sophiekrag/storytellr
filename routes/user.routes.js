@@ -3,6 +3,21 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const Book = require("../models/Book.model");
 
+//Direction to the userProfile
+router.get("/userProfile", async (req, res) => {
+  try {
+    const result = await User.findById(req.session.currentUser._id).populate(
+      "books"
+    );
+    res.render("user/dashboard", {
+      userInSession: req.session.currentUser,
+      books: result,
+    });
+  } catch (err) {
+    console.log(`Err while getting the posts from the DB: ${err}`);
+  }
+});
+
 //Get the books/create route on the site
 router.get("/books/create", (req, res) => {
   res.render("user/book-create");
@@ -28,23 +43,8 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//Direction to the userProfile
-router.get("/userProfile", async (req, res) => {
-  try {
-    const result = await User.findById(req.session.currentUser._id).populate(
-      "books"
-    );
-    res.render("user/dashboard", {
-      userInSession: req.session.currentUser,
-      books: result,
-    });
-  } catch (err) {
-    console.log(`Err while getting the posts from the DB: ${err}`);
-  }
-});
-
 //Get details
-router.get("/userProfile/:bookId", async (req, res, next) => {
+router.get("/books/:bookId", async (req, res, next) => {
   const { bookId } = req.params;
   try {
     const bookDetails = await Book.findById(bookId);
@@ -55,7 +55,7 @@ router.get("/userProfile/:bookId", async (req, res, next) => {
 });
 
 //Edit book
-router.get("/userProfile/:id/edit", async (req, res, next) => {
+router.get("/books/:id/edit", async (req, res, next) => {
   const { id } = req.params;
   try {
     const bookToEdit = await Book.findById(id);
@@ -65,7 +65,7 @@ router.get("/userProfile/:id/edit", async (req, res, next) => {
   }
 });
 
-router.post("/userProfile/:id/edit", async (req, res, next) => {
+router.post("/books/:id/edit", async (req, res, next) => {
   const { id } = req.params;
   const { title, description, author, rating } = req.body;
   try {
@@ -74,14 +74,14 @@ router.post("/userProfile/:id/edit", async (req, res, next) => {
       { title, description, author, rating },
       { new: true }
     );
-    res.redirect(`/userProfile/${bookToUpdate.id}`);
+    res.redirect(`/books/${bookToUpdate.id}`);
   } catch (err) {
     next(err);
   }
 });
 
 //Delete book
-router.post("/userProfile/:id/delete", async (req, res, next) => {
+router.post("/books/:id/delete", async (req, res, next) => {
   const { id } = req.params;
   try {
     await Book.findByIdAndDelete(id);

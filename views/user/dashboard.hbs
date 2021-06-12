@@ -10,9 +10,9 @@
 {{#each books.books}}
   <div>
     <h4>{{this.title}}</h4>
-    <a href="/userProfile/{{id}}">See details</a>
-    <a href="/userProfile/{{id}}/edit">Edit</a> 
-     <form action="/userProfile/{{id}}/delete" method="POST"> 
+    <a href="/books/{{id}}">See details</a>
+    <a href="/books/{{id}}/edit">Edit</a> 
+     <form action="/books/{{id}}/delete" method="POST"> 
       <button>Delete</button>
     </form>
   </div>
