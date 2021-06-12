@@ -45,7 +45,7 @@ router.post("/create", async (req, res) => {
 router.get("/stories/:storyId", async (req, res, next) => {
   const { storyId } = req.params;
   try {
-    const storyDetails = await Story.findById(storyId);
+    const storyDetails = await Story.findById(storyId).populate("author");
     res.render("user/story-detail", { story: storyDetails });
   } catch (err) {
     console.log("Error while retrieving story details: ", err), next(err);
