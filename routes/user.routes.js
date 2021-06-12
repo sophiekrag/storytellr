@@ -2,7 +2,6 @@ const router = require("express").Router();
 
 const User = require("../models/User.model");
 const Book = require("../models/Book.model");
-const isAuth = require("../middleware/auth");
 
 //Get the books/create route on the site
 router.get("/books/create", (req, res) => {
@@ -29,7 +28,8 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.get("/userProfile", isAuth, async (req, res) => {
+//Direction to the userProfile
+router.get("/userProfile", async (req, res) => {
   try {
     const result = await User.findById(req.session.currentUser._id).populate(
       "books"
@@ -80,6 +80,7 @@ router.post("/userProfile/:id/edit", async (req, res, next) => {
   }
 });
 
+//Delete book
 router.post("/userProfile/:id/delete", async (req, res, next) => {
   const { id } = req.params;
   try {
