@@ -63,3 +63,13 @@ body::after {
   display: flex;
   justify-content: space-between;
 }
+
+.book-modify-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.textarea {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,13 +1,15 @@
 <h2>Create a story</h2>
  
 <form action="/create" method="post">
+<div class="textarea">
  
   <label for="title-input">Title:</label>
   <input type="text" name="title" id="title-input" />
  
-  <label for="description-input">Description:</label>
-  <textarea name="description" id="description-input" cols="30" rows="4"> </textarea>
+  <label for="description-input">My story:</label>
+  <textarea name="description" id="description-input" cols="150" rows="25"> </textarea>
  
-  <button type="submit">Create</button>
- 
+  <button class="btn btn-secondary" type="submit">Create</button>
+ </div>
 </form>
+
