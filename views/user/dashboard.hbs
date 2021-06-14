@@ -1,4 +1,3 @@
-{{#if userInSession}}
 <header class="welkom">
   <h1>Welcome {{ userInSession.username }}</h1>
    <div>
@@ -21,11 +20,11 @@
       <h5 class="card-title">{{this.title}}</h5>
       <p class="card-text story-sum">{{this.description}}</p>
       <div class="book-modify-btn">
-      <a href="/stories/{{id}}" class="btn btn-secondary">See details</a>
+      <a href="/stories/{{id}}" class="btn btn-secondary">Read story</a>
       <a href="/stories/{{id}}/edit" class="btn btn-secondary">Edit</a>
       
       <form action="/stories/{{id}}/delete" method="POST">
-        <button onclick="return confirm('Are you sure you want to delete?');" type="submit" class="btn btn-secondary">Delete</button>
+        <button onclick="return confirm('Are you sure you want to delete this story?');" type="submit" class="btn btn-secondary">Delete</button>
       </form>
       </div>
     </div>
@@ -35,6 +34,3 @@
 
 </main>
 
-{{else}}
-<p>You are not logged in</p>
-{{/if}}
