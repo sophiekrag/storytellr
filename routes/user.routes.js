@@ -68,11 +68,11 @@ router.get("/stories/:id/edit", isAuth, async (req, res, next) => {
 /* Post edited story */
 router.post("/stories/:id/edit", isAuth, async (req, res, next) => {
   const { id } = req.params;
-  const { title, description } = req.body;
+  const { title, description, status } = req.body;
   try {
     const storyToUpdate = await Story.findByIdAndUpdate(
       id,
-      { title, description },
+      { title, description, status },
       { new: true }
     );
     res.redirect(`/stories/${storyToUpdate.id}`);
