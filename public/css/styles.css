@@ -1,0 +1,75 @@
+body {
+  width: 100%;
+}
+
+body::after {
+  content: "";
+  background: url(../images/story-book.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  opacity: 0.15;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.navbar-story {
+  width: 100%;
+  top: 0;
+  position: sticky;
+  z-index: 1;
+}
+
+.index-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  color: grey;
+}
+.content {
+  width: 65%;
+  margin: 50px auto;
+}
+
+.titleH2,
+.btn-create-login {
+  margin: 50px 0px;
+}
+
+.story-cards {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.story-sum {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.welkom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-modify-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.textarea {
+  display: flex;
+  flex-direction: column;
+}

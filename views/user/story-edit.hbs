@@ -1,0 +1,13 @@
+<h2>Edit the story</h2>
+
+<form action="/stories/{{story.id}}/edit" method="POST">
+<div class="textarea">
+  <label for="title"> Title: </label>
+    <input type="text" name="title" id="title" value="{{story.title}}" />
+
+  <label for="story"> Edit story:</label>
+    <textarea name="description" id='story' cols="150" rows="25">{{story.description}}</textarea>
+
+  <button class="btn btn-secondary">Save changes</button>
+  </div>
+</form>

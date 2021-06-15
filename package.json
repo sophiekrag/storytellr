@@ -1,0 +1,48 @@
+{
+  "name": "project-module-2",
+  "version": "1.0.0",
+  "description": "Favourite book storage app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sophiekrag/project-module-2.git"
+  },
+  "author": "Sophie Krag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sophiekrag/project-module-2/issues"
+  },
+  "homepage": "https://github.com/sophiekrag/project-module-2#readme",
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "morgan": "^1.10.0",
+    "prettier": "2.3.0"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.4.1",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "hbs": "^4.1.2",
+    "mongoose": "^5.12.13",
+    "path": "^0.12.7"
+  }
+}

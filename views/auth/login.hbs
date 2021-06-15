@@ -1,0 +1,30 @@
+<div class="form">
+  <h2 class="titleH2">Login</h2>
+
+  <form action="/login" method="POST">
+
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+      <label for="floatingInput">Email</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-secondary btn-create-login" type="submit">Login</button>
+    </div>
+
+    {{!-- <p>No account yet?</p>
+
+     <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary"><a href="/signup"> Signup</a></button>
+    </div> --}}
+
+    {{#if errorMessage}}
+    <class="error">{{errorMessage}}</class=>
+    {{/if}}
+  </form>
+</div>
