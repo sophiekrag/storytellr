@@ -73,3 +73,7 @@ body::after {
   display: flex;
   flex-direction: column;
 }
+
+.btn-create {
+  margin: 10px 0;
+}
