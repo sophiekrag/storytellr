@@ -27,7 +27,6 @@
     "eslint-plugin-promise": "^5.1.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "morgan": "^1.10.0",
     "prettier": "2.3.0"
   },
   "lint-staged": {
@@ -43,6 +42,7 @@
     "express-session": "^1.17.2",
     "hbs": "^4.1.2",
     "mongoose": "^5.12.13",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "morgan": "^1.10.0"
   }
 }
