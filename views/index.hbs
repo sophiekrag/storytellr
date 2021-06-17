@@ -1,3 +1,12 @@
+{{#if userInSession}}
+<div class="index-page">
+<h1>Welcome {{userInSession.username}}</h1>
+<br>
+<p>Read <a class="link"href="/stories">here</a> the stories other users wrote</p>
+<p>Or go to your own <a class="link" href="/userProfile">page</a> and create your story</p>
+</div>
+
+{{else}}
 <div class="index-page">
 <h1>Welcome story teller</h1>
 <br>
@@ -7,7 +16,6 @@
 
 <p><a class="btn btn-secondary" href="/signup" role="button">Signup</a> <a class="btn btn-secondary" href="/login" role="button">Login</a></p>
 </div>
-
-
+{{/if}}
 
 
