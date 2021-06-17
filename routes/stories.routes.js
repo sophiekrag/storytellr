@@ -4,10 +4,9 @@ const router = express.Router();
 
 /* GET story page*/
 router.get("/stories", async (req, res, next) => {
-  const { story } = req.params;
   try {
-    const stories = await Story.find(story).populate("author");
-    res.render("stories", { stories: stories });
+    const stories = await Story.find({ status: "public" }).populate("author");
+    res.render("stories", { stories });
   } catch (err) {
     console.log("Error while retrieving story details: ", err), next(err);
   }

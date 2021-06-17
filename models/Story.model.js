@@ -7,7 +7,15 @@ const storySchema = new Schema(
       required: [true, "Title is required."],
     },
     author: { type: Schema.Types.ObjectId, ref: "User" },
-    description: String,
+    description: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "public",
+      enum: ["public", "private"],
+    },
   },
   {
     timestamps: true,

@@ -26,12 +26,13 @@ router.get("/stories/create", isAuth, (req, res) => {
 
 /* Post new created story */
 router.post("/create", isAuth, async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, status } = req.body;
   try {
     const newStory = await Story.create({
       title,
       author: req.session.currentUser._id,
       description,
+      status,
     });
     await User.findByIdAndUpdate(req.session.currentUser._id, {
       $push: { stories: newStory._id },
@@ -67,11 +68,11 @@ router.get("/stories/:id/edit", isAuth, async (req, res, next) => {
 /* Post edited story */
 router.post("/stories/:id/edit", isAuth, async (req, res, next) => {
   const { id } = req.params;
-  const { title, description } = req.body;
+  const { title, description, status } = req.body;
   try {
     const storyToUpdate = await Story.findByIdAndUpdate(
       id,
-      { title, description },
+      { title, description, status },
       { new: true }
     );
     res.redirect(`/stories/${storyToUpdate.id}`);
@@ -84,6 +85,9 @@ router.post("/stories/:id/edit", isAuth, async (req, res, next) => {
 router.post("/stories/:id/delete", isAuth, async (req, res, next) => {
   const { id } = req.params;
   try {
+    await User.findByIdAndUpdate(req.session.currentUser._id, {
+      $pull: { stories: id },
+    });
     await Story.findByIdAndDelete(id);
     res.redirect("/userProfile");
   } catch (err) {
