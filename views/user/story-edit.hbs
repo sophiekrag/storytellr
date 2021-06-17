@@ -2,10 +2,10 @@
 
 <form action="/stories/{{story.id}}/edit" method="POST">
   <div class="textarea">
-    <label for="title"> Title: </label>
+    <label for="title">Title:</label>
     <input type="text" name="title" id="title" value="{{story.title}}" />
 
-    <label for="story"> Edit story:</label>
+    <label for="story">Edit story:</label>
     <textarea name="description" id='story' cols="150" rows="25">{{story.description}}</textarea>
 
     <label for="status">Status:</label>
